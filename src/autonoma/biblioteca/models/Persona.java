@@ -1,39 +1,48 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package autonoma.biblioteca.models;
 
+
+///Clase abstracta
 /**
+ * Modelo que permite representar a una clase abstracta llamada Persona
  *
- * Modelo que permite representar a una persona
  * @author Cristian Camilo Salazar Arenas
+ * @version 1.0.0
  * @since 20250311
- * @version 24
  */
-public class Persona {
-    /////////////////////////////////////////
-    //////Atributos
+
+abstract class Persona {
+    
+    ///Atributos
     /**
-    * Nombre de la persona
+    *Nombre de la persona
     */
     private String nombre;
     /**
-    * Cédula de ciudadania de la persona
+    *Cédula de ciudadania de la persona
     */
-    private String domuentoIdentidad;
+    private String documentoIdentidad;
     /**
-    * Email de la persona
+    *Correo electrónico de la persona
     */
     private String correoElectronico;
     
     
-    ////////////////////////////////////////////////////////////////
+    
     ///Método constructor
+    /**
+    * Este es el método constructor de la clase abstracta llamada Persona.
+    *
+    * @param     nombre                 Nombre de la persona
+    * @param     documentoIdentidad     Documento de identidad de la persona
+    * @param     correoElectronico      Correo electrónico de la persona
+    * @exception ArithmeticException
+    *            Si el segundo operando es <pre>0</pre>
+    * @see       java.lang.Character#charValue()
+    */
 
-    public Persona(String nombre, String domuentoIdentidad, String correoElectronico) {
+    public Persona(String nombre, String documentoIdentidad, String correoElectronico) {
         this.nombre = nombre;
-        this.domuentoIdentidad = domuentoIdentidad;
+        this.documentoIdentidad = documentoIdentidad;
         this.correoElectronico = correoElectronico;
     }
 
@@ -45,12 +54,12 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public String getDomuentoIdentidad() {
-        return domuentoIdentidad;
+    public String getDocumentoIdentidad() {
+        return documentoIdentidad;
     }
 
-    public void setDomuentoIdentidad(String domuentoIdentidad) {
-        this.domuentoIdentidad = domuentoIdentidad;
+    public void setDocumentoIdentidad(String documentoIdentidad) {
+        this.documentoIdentidad = documentoIdentidad;
     }
 
     public String getCorreoElectronico() {
@@ -63,6 +72,4 @@ public class Persona {
     
     //////////////////////
     ///Métodos de acceso
-    
-    
 }
