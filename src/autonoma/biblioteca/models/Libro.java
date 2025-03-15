@@ -1,33 +1,55 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package autonoma.biblioteca.models;
 
 /**
- *
+ * Representa un libro en la biblioteca.
+ * Contiene un identificador único y un título.
+ * 
  * @author truji
  */
 public class Libro {
+    /**
+     * Identificador único del libro.
+     */
     private long id;
+    
+    /**
+     * Título del libro.
+     */
     private String titulo;
 
+    /**
+     * Obtiene el identificador del libro.
+     * 
+     * @return el identificador del libro.
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * Establece el identificador del libro.
+     * 
+     * @param id el nuevo identificador del libro.
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     * Obtiene el título del libro.
+     * 
+     * @return el título del libro.
+     */
     public String getTitulo() {
         return titulo;
     }
 
+    /**
+     * Establece el título del libro.
+     * 
+     * @param titulo el nuevo título del libro.
+     */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-    
-    
 }
-
