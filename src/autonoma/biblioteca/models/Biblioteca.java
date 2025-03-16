@@ -8,7 +8,7 @@ public class Biblioteca {
     private ArrayList<Libro> libros;
     
     public Biblioteca(){
-        
+        this.libros = new ArrayList<>();
     }
 
     public Biblioteca(ArrayList<Libro> libros) {
@@ -31,7 +31,7 @@ public class Biblioteca {
     }
 
     
-    public boolean agregarLibro(Libro libro){
+    public boolean agregarLibro(Libro libro){ //Se recibe como párametro un libro
         return this.libros.add(libro);
     }
     
