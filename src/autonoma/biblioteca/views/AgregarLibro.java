@@ -254,6 +254,10 @@ public class AgregarLibro extends javax.swing.JDialog {
     }//GEN-LAST:event_btnVolverMouseClicked
 
     private void btnAgregarLibroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarLibroActionPerformed
+        
+    }//GEN-LAST:event_btnAgregarLibroActionPerformed
+
+    private void btnAgregarLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarLibroMouseClicked
         //Datos del autor
         String nombre = this.txtNombre.getText();
         String documentoIdentidad = this.txtDocumentoIdentidad.getText();
@@ -268,15 +272,9 @@ public class AgregarLibro extends javax.swing.JDialog {
         //Aquí se crea una instancia de la clase libro
         Libro libro = new Libro(id, titulo, autor);
         biblioteca.agregarLibro(libro);
-    }//GEN-LAST:event_btnAgregarLibroActionPerformed
-
-    private void btnAgregarLibroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarLibroMouseClicked
-        try {
-            this.dispose();
-
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this,"");
-        }
+        JOptionPane.showMessageDialog(this, "El libro fué agregado.");
+        System.out.println(biblioteca.mostrarLibros());
+        this.dispose();
     }//GEN-LAST:event_btnAgregarLibroMouseClicked
 
     private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
