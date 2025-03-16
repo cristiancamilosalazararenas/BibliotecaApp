@@ -1,17 +1,8 @@
-<<<<<<< HEAD
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package autonoma.biblioteca.models;
-
-/**
- *
- * @author truji
- */
-public class Autor {
-    
-=======
 package autonoma.biblioteca.models;
 
 //Clase Autor
@@ -109,5 +100,4 @@ public class Autor extends Persona{
             this.profesion = profesion;
         }
     }   
->>>>>>> 423afab9142bafd289c4facbf22f1d45989465e1
 }
