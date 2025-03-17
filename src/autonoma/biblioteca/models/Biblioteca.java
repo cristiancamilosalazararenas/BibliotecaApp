@@ -1,69 +1,106 @@
 package autonoma.biblioteca.models;
 
-// @author vanes
-
+/**
+ * Clase Biblioteca
+ * 
+ * @author Vanessa Toro
+ * @version 20250316
+ * @since 1.0
+ */
 import java.util.ArrayList;
 
 public class Biblioteca {
     private ArrayList<Libro> libros;
-    
-    public Biblioteca(){
+
+    /**
+     * Constructor de la clase Biblioteca
+     * Inicializa la lista de libros
+     */
+    public Biblioteca() {
         this.libros = new ArrayList<>();
     }
 
-    public Biblioteca(ArrayList<Libro> libros) {
-        this.libros = libros;
-    }
-    
-    
+    /**
+     * Muestra todos los libros disponibles en la biblioteca
+     * 
+     * @return String con los detalles de los libros o un mensaje indicando que no hay libros
+     */
     public String mostrarLibros() {
         if (libros.isEmpty()) {
             return "No hay libros en la biblioteca";
         }
         String librosS = "";
-
+        
         for (int i = 0; i < this.libros.size(); i++) {
             Libro libroS = this.libros.get(i);
-            librosS += "Nombre: " + libroS.getTitulo() + "\n"
-                    + "Id: " + libroS.getId() + "\n";
+            librosS += libroS.getTitulo() + "\n " + libroS.getId() + "\n "+ libroS.getAutor().getNombre() +"\n"+ libroS.getAutor().getEditorial()+ "\n";
         }
         return librosS;
     }
 
-    
-    public boolean agregarLibro(Libro libro){ //Se recibe como párametro un libro
+    /**
+     * Agrega un nuevo libro a la biblioteca
+     * 
+     * @param libro Libro a agregar
+     * @return true si se agrego correctamente, false en caso contrario
+     */
+    public boolean agregarLibro(Libro libro) {
         return this.libros.add(libro);
     }
-    
-    public Libro buscarLibro(long id){
-        for (int i=0; i< libros.size();i++){
-            if (this.libros.get(i).getId() == id){
-                return this.libros.get(i);              
+
+    /**
+     * Busca un libro en la biblioteca por su id
+     * 
+     * @param id Identificador del libro
+     * @return El libro encontrado o null si no existe
+     */
+    public Libro buscarLibro(long id) {
+        for (int i = 0; i < libros.size(); i++) {
+            if (this.libros.get(i).getId() == id) {
+                return this.libros.get(i);
             }
         }
-        return null; 
+        return null;
     }
-    
-    public boolean actualizarLibro(long id ,Libro libro){
-        for (int i=0; i< this.libros.size();i++){
-            if (this.libros.get(i).getId() == id){
+
+    /**
+     * Actualiza un libro existente en la biblioteca
+     * 
+     * @param id Identificador del libro a actualizar
+     * @param libro Nuevo libro con la informacion nueva
+     * @return true si se actualizo correctamente, false si el libro no existe
+     */
+    public boolean actualizarLibro(long id, Libro libro) {
+        for (int i = 0; i < this.libros.size(); i++) {
+            if (this.libros.get(i).getId() == id) {
                 this.libros.set(i, libro);
-                return true;              
+                return true;
             }
         }
         return false;
     }
-    
-    public boolean eliminarLibro(long id){
+
+    /**
+     * Elimina un libro de la biblioteca por su id
+     * 
+     * @param id Identificador del libro a eliminar
+     * @return true si se elimino correctamente, false si el libro no existe
+     */
+    public boolean eliminarLibro(long id) {
         for (int i = 0; i < this.libros.size(); i++) {
-            if (this.libros.get(i).getId() == id){
+            if (this.libros.get(i).getId() == id) {
                 this.libros.remove(i);
                 return true;
             }
         }
         return false;
     }
-    
+
+    /**
+     * Ordena y devuelve la lista de libros en orden alfabetico segun su título.
+     * 
+     * @return ArrayList de libros ordenados alfabeticamente
+     */
     public ArrayList<Libro> obtenerLibrosAlfabeticamente() {
         ArrayList<Libro> librosOrdenados = new ArrayList<>(libros);
         int n = librosOrdenados.size();

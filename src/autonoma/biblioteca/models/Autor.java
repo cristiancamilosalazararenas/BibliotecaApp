@@ -47,6 +47,10 @@ public class Autor extends Persona{
         this.profesion = profesion;
     }
     
+    public Autor(String nombre, String editorial){
+        super(nombre, "N/A", "N/A");
+        this.editorial = editorial;
+    }
     //Métodos de acceso
     
     /**

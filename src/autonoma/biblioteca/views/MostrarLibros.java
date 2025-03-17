@@ -4,8 +4,14 @@
  */
 package autonoma.biblioteca.views;
 
+import autonoma.biblioteca.models.Autor;
 import autonoma.biblioteca.models.Biblioteca;
+import autonoma.biblioteca.models.Libro;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -14,6 +20,7 @@ import javax.swing.ImageIcon;
 public class MostrarLibros extends javax.swing.JDialog {
     private Biblioteca biblioteca;
     private VentanaPrincipal ventanaPrincipal;
+    private ArrayList<Libro> listaLibros;
     /**
      * Creates new form MostrarLibros
      */
@@ -28,7 +35,8 @@ public class MostrarLibros extends javax.swing.JDialog {
 
         }
         this.biblioteca = biblioteca;
-        this.ventanaPrincipal = ventana;
+        this.ventanaPrincipal = ventana;    
+        this.llenarTabla();
     }
 
     /**
@@ -42,26 +50,50 @@ public class MostrarLibros extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         lblBiblioteca = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaLibros = new javax.swing.JTable();
+        btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(680, 470));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(192, 250, 236));
 
-        lblBiblioteca.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblBiblioteca.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblBiblioteca.setForeground(new java.awt.Color(0, 0, 0));
-        lblBiblioteca.setText("Libros");
+        lblBiblioteca.setText("LIBROS");
+
+        jPanel6.setBackground(new java.awt.Color(192, 250, 236));
+
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/biblioteca/images/biblioteca2.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(296, 296, 296)
+                .addGap(161, 161, 161)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addComponent(lblBiblioteca)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(302, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,19 +101,78 @@ public class MostrarLibros extends javax.swing.JDialog {
                 .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(lblBiblioteca)
                 .addGap(30, 30, 30))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+
+        tablaLibros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Id", "Titulo", "Autor", "Editorial"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaLibros.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tablaLibros);
+        if (tablaLibros.getColumnModel().getColumnCount() > 0) {
+            tablaLibros.getColumnModel().getColumn(0).setResizable(false);
+            tablaLibros.getColumnModel().getColumn(1).setResizable(false);
+            tablaLibros.getColumnModel().getColumn(2).setResizable(false);
+            tablaLibros.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        btnVolver.setText("Volver");
+        btnVolver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVolverMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(295, 295, 295)
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 371, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -102,10 +193,54 @@ public class MostrarLibros extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_btnVolverMouseClicked
+    
+    public void llenarTabla() {
+        String librosTexto = this.biblioteca.mostrarLibros();
+        if (librosTexto.equals("No hay libros en la biblioteca")) {
+            return;
+        }
+        
+        String[] lineas = librosTexto.split("\n");
+        ArrayList<Libro> listaLibros = new ArrayList<>();
+        for (int i = 0; i < lineas.length; i += 4) {
+            if (i + 3 < lineas.length) {
+                String titulo = lineas[i].trim();
+                String id = lineas[i + 1].trim();
+                String nombre = lineas[i + 2].trim();
+                String editorial = lineas[i + 3].trim();
+                
+                long idN = Long.parseLong(id);
+                Autor autor = new Autor (nombre,editorial);
+                Libro libro = new Libro(idN, titulo, autor);
+                listaLibros.add(libro);
+            }
+        }
+        
+        DefaultTableModel modelDefault = new DefaultTableModel(new String[]{"Id", "Titulo","Autor", "Editorial"}, listaLibros.size());
+        this.tablaLibros.setModel(modelDefault);    
+        TableModel dataModel = tablaLibros.getModel();
+        for(int i=0; i< listaLibros.size();i++){
+            Libro libro = listaLibros.get(i);
+            dataModel.setValueAt(libro.getId(),i,0);            
+            dataModel.setValueAt(libro.getTitulo(),i,1);
+            dataModel.setValueAt(libro.getAutor().getNombre(),i,2);
+            dataModel.setValueAt(libro.getAutor().getEditorial(),i,3);
+        }
+    }
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVolver;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBiblioteca;
+    private javax.swing.JTable tablaLibros;
     // End of variables declaration//GEN-END:variables
 }
