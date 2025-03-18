@@ -221,13 +221,15 @@ public class MostrarLibros extends javax.swing.JDialog {
         
         DefaultTableModel modelDefault = new DefaultTableModel(new String[]{"Id", "Titulo","Autor", "Editorial"}, listaLibros.size());
         this.tablaLibros.setModel(modelDefault);    
-        TableModel dataModel = tablaLibros.getModel();
+        TableModel dataModel = tablaLibros.getModel();       
+        
         for(int i=0; i< listaLibros.size();i++){
+            Autor autor = listaLibros.get(i).getAutor();
             Libro libro = listaLibros.get(i);
             dataModel.setValueAt(libro.getId(),i,0);            
             dataModel.setValueAt(libro.getTitulo(),i,1);
-            dataModel.setValueAt(libro.getAutor().getNombre(),i,2);
-            dataModel.setValueAt(libro.getAutor().getEditorial(),i,3);
+            dataModel.setValueAt(autor.getNombre(),i,2);
+            dataModel.setValueAt(autor.getEditorial(),i,3);
         }
     }
 

@@ -4,6 +4,7 @@
  */
 package autonoma.biblioteca.views;
 
+import autonoma.biblioteca.models.Autor;
 import autonoma.biblioteca.models.Biblioteca;
 import autonoma.biblioteca.models.Libro;
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class MostrarLibrosAlfa extends javax.swing.JDialog {
 
         lblBiblioteca.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblBiblioteca.setForeground(new java.awt.Color(0, 0, 0));
-        lblBiblioteca.setText("LIRBOS ALFABETICAMENTE");
+        lblBiblioteca.setText("LIBROS ALFABETICAMENTE");
 
         jPanel6.setBackground(new java.awt.Color(192, 250, 236));
 
@@ -140,12 +141,11 @@ public class MostrarLibrosAlfa extends javax.swing.JDialog {
         if (tablaLibrosAlfa.getColumnModel().getColumnCount() > 0) {
             tablaLibrosAlfa.getColumnModel().getColumn(0).setResizable(false);
             tablaLibrosAlfa.getColumnModel().getColumn(1).setResizable(false);
+            tablaLibrosAlfa.getColumnModel().getColumn(2).setResizable(false);
             tablaLibrosAlfa.getColumnModel().getColumn(3).setResizable(false);
         }
 
         btnVolver.setLabel("Volver");
-        btnVolver.setMaximumSize(new java.awt.Dimension(72, 23));
-        btnVolver.setMinimumSize(new java.awt.Dimension(72, 23));
         btnVolver.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnVolverMouseClicked(evt);
@@ -174,8 +174,6 @@ public class MostrarLibrosAlfa extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        btnVolver.getAccessibleContext().setAccessibleName("Volver");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,14 +200,15 @@ public class MostrarLibrosAlfa extends javax.swing.JDialog {
         DefaultTableModel modelDefault = new DefaultTableModel (new String []{"Titulo","Id","Autor","Editorial"},this.libros.size());
         this.tablaLibrosAlfa.setModel(modelDefault);
         
-        TableModel dataModel = tablaLibrosAlfa.getModel();
+        TableModel dataModel = tablaLibrosAlfa.getModel();      
         for(int i=0; i< this.libros.size();i++){
+            Autor autor = this.libros.get(i).getAutor();
             Libro libro = this.libros.get(i);
             
             dataModel.setValueAt(libro.getTitulo(),i,0);
             dataModel.setValueAt(libro.getId(),i,1);
-            dataModel.setValueAt(libro.getAutor().getNombre(),i,2);
-            dataModel.setValueAt(libro.getAutor().getEditorial(),i,3);
+            dataModel.setValueAt(autor.getNombre(),i,2);
+            dataModel.setValueAt(autor.getEditorial(),i,3);
 
         }
     }
